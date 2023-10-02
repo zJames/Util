@@ -1,0 +1,69 @@
+//------------------------------------------------------------------------------
+//  Copyright : (c) 2015
+//  Authors :
+//	  JRP	James Prettyman
+//------------------------------------------------------------------------------
+
+#include "BaseWindow.h"
+////////////////////////////////////////////////////////////////////////////////
+
+
+//------------------------------------------------------------------------------
+//	BaseWindow
+//------------------------------------------------------------------------------
+BaseWindow::BaseWindow()
+	:
+	m_hWnd(NULL),
+	m_hParent(NULL),
+	m_hInstance(NULL)
+{
+}
+
+
+BaseWindow::~BaseWindow()
+{
+}
+
+
+void BaseWindow::setTitle(const TCHAR* szTitle)
+{
+	SetWindowText(m_hWnd, szTitle);
+}
+
+
+HWND BaseWindow::hWnd() const
+{
+	return m_hWnd;
+}
+
+
+HWND BaseWindow::hParent() const
+{
+	return m_hParent;
+}
+
+
+HINSTANCE BaseWindow::hInstance() const
+{
+	return m_hInstance;
+}
+
+
+Rect BaseWindow::clientRect() const
+{
+	RECT rcClient;
+
+	GetClientRect(hWnd(), &rcClient);
+
+	return rcClient;
+}
+
+
+Rect BaseWindow::windowRect() const
+{
+	RECT rcWindow;
+
+	GetWindowRect(hWnd(), &rcWindow);
+
+	return rcWindow;
+}
