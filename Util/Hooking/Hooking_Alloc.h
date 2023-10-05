@@ -1,38 +1,22 @@
 //------------------------------------------------------------------------------
-//  Copyright : (c) 2015
+//  Copyright : (c) 2023
 //  Authors :
 //	  JRP	James Prettyman
 //------------------------------------------------------------------------------
 
 #pragma once
 
-#include "Rect.h"
-#include "WindowsInc.h"
+#include <Windows.h>
 ////////////////////////////////////////////////////////////////////////////////
 
-
-//------------------------------------------------------------------------------
-//	BaseWindow
-//------------------------------------------------------------------------------
-class BaseWindow
+namespace Hooking
 {
-public:
-	BaseWindow();
-	virtual ~BaseWindow();
+//------------------------------------------------------------------------------
+//	Hooking Allocation Functions
+//------------------------------------------------------------------------------
+void* AllocPageInTargetProcess(HANDLE process);
+void* AllocPage();
+void* AllocatePageNearAddressRemote(HANDLE handle, void* targetAddr);
+void* AllocatePageNearAddress(void* targetAddr);
 
-	void setTitle(const TCHAR* szTitle);
-	void destroyMenu();
-
-	HWND hWnd() const;
-	HWND hParent() const;
-	HMENU hMenu() const;
-	HINSTANCE hInstance() const;
-	Rect clientRect() const;
-	Rect windowRect() const;
-
-protected:
-	HWND m_hWnd;
-	HWND m_hParent;
-	HMENU m_hMenu;
-	HINSTANCE m_hInstance;
-};
+} //end namespace Hooking

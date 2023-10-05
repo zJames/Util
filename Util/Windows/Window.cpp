@@ -17,17 +17,12 @@
 //	Constructors & Destructor
 //------------------------------------------------------------------------------
 Window::Window()
-	:
-	m_hMenu(NULL)
 {
 }
 
 Window::~Window()
 {
-	if (m_hMenu != NULL)
-	{
-		DestroyMenu(m_hMenu);
-	}
+	destroyMenu();
 
 	if (m_hWnd != NULL)
 	{
@@ -108,11 +103,7 @@ void Window::destroy()
 		return;
 	}
 
-	if (m_hMenu != NULL)
-	{
-		DestroyMenu(m_hMenu);
-		m_hMenu = NULL;
-	}
+	destroyMenu();
 
 #ifdef MOBILE_APP
 	sWindowMap[m_hWnd] = NULL;

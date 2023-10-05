@@ -45,6 +45,9 @@
     <Filter Include="Source Files\XmlWrite">
       <UniqueIdentifier>{3a3114d4-112e-41e9-accc-904f0a38c58b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Hooking">
+      <UniqueIdentifier>{5ee23e1d-c79c-48cc-8303-aad8f502e9e3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics\Bitmap.h">
@@ -353,6 +356,18 @@
     <ClInclude Include="Core\ReferenceCounter.h">
       <Filter>Source Files\Core</Filter>
     </ClInclude>
+    <ClInclude Include="Hooking.h">
+      <Filter>Source Files\Hooking</Filter>
+    </ClInclude>
+    <ClInclude Include="Hooking\Hooking_Common.h">
+      <Filter>Source Files\Hooking</Filter>
+    </ClInclude>
+    <ClInclude Include="Hooking\Hooking_Write.h">
+      <Filter>Source Files\Hooking</Filter>
+    </ClInclude>
+    <ClInclude Include="Hooking\Hooking_Alloc.h">
+      <Filter>Source Files\Hooking</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Graphics\Bitmap.cpp">
@@ -504,6 +519,15 @@
     </ClCompile>
     <ClCompile Include="Config\Config_ConvertT.cpp">
       <Filter>Source Files\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="Hooking\Hooking_Common.cpp">
+      <Filter>Source Files\Hooking</Filter>
+    </ClCompile>
+    <ClCompile Include="Hooking\Hooking_Write.cpp">
+      <Filter>Source Files\Hooking</Filter>
+    </ClCompile>
+    <ClCompile Include="Hooking\Hooking_Alloc.cpp">
+      <Filter>Source Files\Hooking</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

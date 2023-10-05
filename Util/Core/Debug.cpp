@@ -8,6 +8,8 @@
 
 #include "File.h"
 #include "../Util.h"
+#include "../Misc/TextManip.h"
+#include "../Text/RefString.h"
 
 #include <time.h>
 #include <stdarg.h>
@@ -16,7 +18,11 @@
 
 #ifdef _DEBUG
 
-static File sDebugText("Debug.txt", File::eOption_Append_Text);
+RefString debugFileName();
+
+static const RefString kBaseFolder = "";
+
+static File sDebugText(debugFileName(), File::eOption_Append_Text);
 
 
 //------------------------------------------------------------------------------
@@ -40,6 +46,15 @@ const char* getTimeStr()
 	strftime(kTimeBuffer, ARRAY_LENGTH(kTimeBuffer), "%Y-%m-%d %OH:%M:%S", getTime());
 
 	return kTimeBuffer;
+}
+
+RefString debugFileName()
+{
+	RefString moduleName(256);
+
+	GetModuleFileName(NULL, moduleName.ptr(), DWORD(moduleName.dataSize()));
+
+	return kBaseFolder + plainName(moduleName) + "_Debug.txt";
 }
 
 

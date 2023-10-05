@@ -15,6 +15,7 @@ BaseWindow::BaseWindow()
 	:
 	m_hWnd(NULL),
 	m_hParent(NULL),
+	m_hMenu(NULL),
 	m_hInstance(NULL)
 {
 }
@@ -22,12 +23,22 @@ BaseWindow::BaseWindow()
 
 BaseWindow::~BaseWindow()
 {
+	destroyMenu();
 }
 
 
 void BaseWindow::setTitle(const TCHAR* szTitle)
 {
 	SetWindowText(m_hWnd, szTitle);
+}
+
+void BaseWindow::destroyMenu()
+{
+	if (m_hMenu != NULL)
+	{
+		DestroyMenu(m_hMenu);
+		m_hMenu = NULL;
+	}
 }
 
 
@@ -40,6 +51,12 @@ HWND BaseWindow::hWnd() const
 HWND BaseWindow::hParent() const
 {
 	return m_hParent;
+}
+
+
+HMENU BaseWindow::hMenu() const
+{
+	return m_hMenu;
 }
 
 

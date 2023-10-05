@@ -75,6 +75,22 @@
     <ClInclude Include="Graphics\LoadPCX.h" />
     <ClInclude Include="Graphics\SaveImage.h" />
     <ClInclude Include="Graphics\SharedImage.h" />
+    <ClInclude Include="Hooking.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Hooking\Hooking_Alloc.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Hooking\Hooking_Common.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Hooking\Hooking_Write.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Math.h" />
     <ClInclude Include="Math\Angle.h" />
     <ClInclude Include="Math\Angles.h" />
@@ -150,6 +166,18 @@
     <ClCompile Include="Graphics\LoadPCX.cpp" />
     <ClCompile Include="Graphics\SaveImage.cpp" />
     <ClCompile Include="Graphics\SharedImage.cpp" />
+    <ClCompile Include="Hooking\Hooking_Alloc.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Hooking\Hooking_Common.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Hooking\Hooking_Write.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Math\Angle.cpp" />
     <ClCompile Include="Math\Fixed.cpp" />
     <ClCompile Include="Math\Matrix.cpp" />

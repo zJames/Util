@@ -44,6 +44,4 @@ private:
 						const TCHAR* szWindowClass,
 						HICON hIcon,
 						LPCSTR lpszMenuName);
-
-	HMENU m_hMenu;
 };
