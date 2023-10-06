@@ -20,7 +20,7 @@
 
 RefString debugFileName();
 
-static const RefString kBaseFolder = "";
+static const RefString kBaseFolder = "D:\\Logs\\";
 
 static File sDebugText(debugFileName(), File::eOption_Append_Text);
 
