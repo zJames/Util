@@ -8,6 +8,7 @@
 
 #include "../Text/RefString.h"
 
+#include <list>
 #include <vector>
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -24,7 +25,7 @@ public:
 	typedef SharedArray<const char> SharedType;
 
 	Node();
-	Node(const SharedType&data, const char* start);
+	Node(const SharedType& data, const char* start);
 	Node(const Node& other);
 
 	void load(const SharedType& data, const char* start);
@@ -37,6 +38,7 @@ public:
 	int size() const;
 	Node getNode(size_t index) const;
 	Node getNode(const RefString& name) const;
+	std::list<Node> nodes() const;
 
 	Node& operator =(const Node& other);
 

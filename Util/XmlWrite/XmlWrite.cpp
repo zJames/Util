@@ -33,20 +33,35 @@ namespace XmlWrite
 			fprintf(file, "%*s", depth, " ");
 		}
 
-		fprintf(file, "<%s ", node->name.c_str());
+		fprintf(file, "<%s", node->name.c_str());
+
+		if (!node->attributes.empty())
+		{
+			fprintf(file, " ");
+		}
 
 		for (Node::AttributeMap::const_iterator i = node->attributes.begin(); i != node->attributes.end(); ++i)
 		{
 			fprintf(file, "%s=\"%s\" ", i->first.c_str(), i->second.c_str());
 		}
 
-		if (node->subNodes.empty())
+		if (node->subNodes.empty() && node->insideText.empty())
 		{
 			fprintf(file, "/>\n");
 		}
 		else
 		{
-			fprintf(file, ">\n");
+			fprintf(file, ">");
+
+			if (!node->insideText.empty())
+			{
+				fprintf(file, node->insideText.const_ptr());
+			}
+
+			if (!node->subNodes.empty())
+			{
+				fprintf(file, "\n");
+			}
 
 			for (Node::NodeList::const_iterator i = node->subNodes.begin(); i != node->subNodes.end(); ++i)
 			{
@@ -61,6 +76,11 @@ namespace XmlWrite
 	//------------------------------------------------------------------------------
 	//	XmlWrite
 	//------------------------------------------------------------------------------
+	NodePtr newNode()
+	{
+		return NodePtr(new Node());
+	}
+
 	bool write(const char* fileName, const Node& root)
 	{
 		File file(fileName, File::eOption_Write_Text);

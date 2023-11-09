@@ -22,8 +22,9 @@ namespace RefStringHelper
 	int compare(const char* first, const char* second);
 	int compare(const wchar_t* first, const wchar_t* second);
 
+	//Checks if two sub strings match, stopping when one string reaches null
 	template<class T>
-	bool compare(const T* first, const T* second)
+	bool comparePartial(const T* first, const T* second)
 	{
 		if (first == second)
 		{
@@ -162,6 +163,13 @@ public:
 
 		const size_t oldLen = RefStringHelper::length(const_ptr());
 		const size_t copyLen = RefStringHelper::length(text);
+
+		//The length to copy is 0, so we should just abort
+		if (copyLen == 0)
+		{
+			return *this;
+		}
+
 		const size_t newLen = max(oldLen + copyLen + 1, mDataSize);
 		const Maybe<int> refCount = mData.refCount();
 
@@ -300,10 +308,10 @@ public:
 
 		for (const T* i = old.c_str(); *i != 0; ++i)
 		{
-			if (RefStringHelper::compare(i, toFind) == 0)
+			if (RefStringHelper::comparePartial(i, toFind))
 			{
 				*this += toReplace;
-				i += toFindLen - 1;
+				i += toFindLen;
 			}
 			else
 			{

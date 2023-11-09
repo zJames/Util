@@ -12,7 +12,9 @@
 //	Windows
 //------------------------------------------------------------------------------
 #include "Windows/ComboBox.h"
+#include "Windows/DesktopWorker.h"
 #include "Windows/Dialog.h"
+#include "Windows/EnumMonitors.h"
 #include "Windows/MemoryDLL.h"
 #include "Windows/Rect.h"
 #include "Windows/Thread.h"

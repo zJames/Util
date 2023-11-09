@@ -39,6 +39,13 @@ const char kTestXml[] =
 </text_objects>\
 </scene>";
 
+const char kTestXml2[] =
+"<?xml version=\"1.0\" encoding=\"utf-8\"?>\
+<testprop1>\
+</testprop1>\
+<testprop2>\
+</testprop2>";
+
 
 #define THROW_ON_FAIL(n) { if (!(n)) throw "Was false: " #n; }
 
@@ -78,7 +85,9 @@ void testDomXml()
 
 	memcpy(const_cast<char*>(xmlText.get()), kTestXml, ARRAY_LENGTH(kTestXml));
 
-	const Node& scene = getFirstNode(xmlText);
+	const Node& xml = getFirstNode(xmlText);
+
+	const Node& scene = xml.getNode("scene");
 
 	THROW_ON_FAIL(scene.name() == "scene");
 	THROW_ON_FAIL(scene.size() == 3);
@@ -119,7 +128,8 @@ void testDomXml()
 
 	//Testing inside text
 	{
-		Node scene2 = getFirstNode(xmlText);
+		Node xml2 = getFirstNode(xmlText);
+		Node scene2 = xml2.getNode("scene");
 
 		const Node& textObjects = scene2.getNode("text_objects");
 
@@ -141,11 +151,28 @@ void testDomXml()
 			
 			memcpy(const_cast<char*>(xmlText2.get()), kTestXml, ARRAY_LENGTH(kTestXml));
 			
-			const Node& scene2 = getFirstNode(xmlText2);
+			const Node& xml2 = getFirstNode(xmlText2);
+			const Node& scene2 = xml2.getNode("scene");
 			
 			attrib = scene2.getNode("objects").getNode(1).attribute("file");
 		}
 
 		THROW_ON_FAIL(attrib == "b.png");
+	}
+
+	{
+		SharedArray<const char> xmlText(new char[ARRAY_LENGTH(kTestXml2)]);
+
+		memcpy(const_cast<char*>(xmlText.get()), kTestXml2, ARRAY_LENGTH(kTestXml2));
+
+		Node scene2 = getFirstNode(kTestXml2);
+
+		THROW_ON_FAIL(scene2.name() != "?xml");
+
+		auto sceneNodes = scene2.nodes();
+
+		THROW_ON_FAIL(sceneNodes.size() != 2);
+		THROW_ON_FAIL(sceneNodes.front().name() != "testprop1");
+		THROW_ON_FAIL(sceneNodes.back().name() != "testprop2");
 	}
 }

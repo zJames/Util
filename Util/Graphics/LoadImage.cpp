@@ -7,6 +7,7 @@
 #include "LoadImage.h"
 
 #include "loadILBM.h"
+#include "LoadJPEG.h"
 #include "LoadPCX.h"
 #include "LoadPNG.h"
 #include "../Core/Debug.h"
@@ -47,6 +48,10 @@ namespace Graphics
 		else if (_strcmpi("lbm", ext) == 0)
 		{
 			loadILBM(txtr, image);
+		}
+		else if (_strcmpi("jpg", ext) == 0 || _strcmpi("jpeg", ext) == 0)
+		{
+			loadJPEG(txtr, image);
 		}
 	}
 
@@ -89,7 +94,9 @@ namespace Graphics
 		else if (charData[0] == 137 && charData[1] == 'P' && charData[2] == 'N' && charData[3] == 'G')
 		{
 			if (!LoadPNG(charData, dataSize, image))
+			{
 				LogDebug("LoadImage: ERROR: Could not load PNG from data\n");
+			}
 		}
 	}
 

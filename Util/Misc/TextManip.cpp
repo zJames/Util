@@ -58,7 +58,7 @@ size_t findLastDot(const char* fileName)
 		}
 	}
 
-	return len;
+	return len + 1;
 }
 
 RefString plainName(const char* fileName)
@@ -66,7 +66,7 @@ RefString plainName(const char* fileName)
 	size_t lastSlash = findLastSlash(fileName);
 	size_t lastDot = findLastDot(fileName);
 
-	return RefString::copy(fileName + (lastSlash > 0 ? lastSlash + 1 : 0), lastDot - lastSlash);
+	return RefString::copy(fileName + (lastSlash > 0 ? lastSlash + 1 : 0), lastDot - lastSlash - 1);
 }
 
 RefString directoryPath(const char* filePath)

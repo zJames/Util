@@ -16,6 +16,7 @@
 #include "Config/Config_ConvertEnum.h"
 #include "Config/Config_Defaults.h"
 #include "Config/Config_Option.h"
+#include "Config/Config_XML.h"
 
 #ifdef WIN32
 #include "Config/Config_StringResource.h"

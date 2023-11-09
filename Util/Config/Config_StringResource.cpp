@@ -39,7 +39,7 @@ namespace Config
 
 		if (iter == mStrings.end())
 		{
-			return NULL;
+			return nullptr;
 		}
 
 		incIndex();

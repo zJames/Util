@@ -84,7 +84,7 @@ namespace Config
 		prefix(_prefix),
 		seperator(_seperator)
 	{
-		const size_t prefixLen = _prefix == NULL ? 0 : strlen(_prefix);
+		const size_t prefixLen = (_prefix == nullptr) ? 0 : strlen(_prefix);
 
 		for (int i = 1; i < argc; ++i)
 		{

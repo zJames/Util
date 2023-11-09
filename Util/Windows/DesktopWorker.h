@@ -1,26 +1,25 @@
 //------------------------------------------------------------------------------
-//  Copyright : (c) 2015
+//  Copyright : (c) 2022
 //  Authors :
 //	  JRP	James Prettyman
 //------------------------------------------------------------------------------
 
 #pragma once
+
+#include "WindowsInc.h"
+
+#include "..\Containers\Maybe.h"
 ////////////////////////////////////////////////////////////////////////////////
 
 
+namespace Windows
+{
 //------------------------------------------------------------------------------
-//	Graphics
+//	DesktopWorker
 //------------------------------------------------------------------------------
-#include "Graphics/ARGB.h"
-#include "Graphics/ARGBFX.h"
-#include "Graphics/Bitmap.h"
-#include "Graphics/ConvertToGrayMap.h"
-#include "Graphics/CycleBitmap.h"
-#include "Graphics/FileMesh.h"
-#include "Graphics/loadILBM.h"
-#include "Graphics/LoadImage.h"
-#include "Graphics/LoadJPEG.h"
-#include "Graphics/LoadPCX.h"
-#include "Graphics/LoadPNG.h"
-#include "Graphics/SaveImage.h"
-#include "Graphics/SharedImage.h"
+BOOL __stdcall enumProc(HWND hWnd, LPARAM param);
+Maybe<HWND> findWallpaperWindow(HWND hTopWindow);
+Maybe<HWND> createWorker();
+HINSTANCE moduleHandle();
+
+} //end namespace Windows

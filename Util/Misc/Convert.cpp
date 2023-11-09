@@ -168,9 +168,10 @@ Vector2i convertToVector2i(const char* input)
 
 RefStringW convertToW(const RefString& input)
 {
-	RefStringW ret(input.dataSize());
+	const size_t dataSize = input.length() + 1;
+	RefStringW ret(dataSize);
 
-	for (size_t i = 0; i < input.dataSize(); ++i)
+	for (size_t i = 0; i < dataSize; ++i)
 	{
 		ret.ptr()[i] = input.const_ptr()[i];
 	}

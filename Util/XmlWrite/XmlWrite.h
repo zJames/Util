@@ -14,9 +14,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 
-class File;
-
-
 //------------------------------------------------------------------------------
 //	XmlWrite
 //------------------------------------------------------------------------------
@@ -33,8 +30,11 @@ namespace XmlWrite
 
 		RefString name;
 		AttributeMap attributes;
+		RefString insideText;
 		NodeList subNodes;
 	};
+
+	NodePtr newNode();
 
 	bool write(const char* fileName, const Node& root);
 } //end namespace XmlWrite

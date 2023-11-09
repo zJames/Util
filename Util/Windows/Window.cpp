@@ -95,7 +95,6 @@ void Window::setIdeal(int width, int height)
 		TRUE);
 }
 
-
 void Window::destroy()
 {
 	if (m_hWnd == NULL)
@@ -153,14 +152,13 @@ LRESULT CALLBACK Window::wndProc(
 	case WM_QUIT:
 	case WM_DESTROY:
 		{
-			PostQuitMessage(0);
-
 			Window* pWindow = reinterpret_cast<Window*>(GetWindowLongPtr(hWnd, GWLP_USERDATA));
 
 			if (pWindow)
 			{
 				pWindow->onMessage(message, wParam, lParam);
 				pWindow->m_hWnd = NULL;
+				DestroyWindow(hWnd);
 			}
 		}
 		break;

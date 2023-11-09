@@ -45,4 +45,22 @@ void testRefString()
 	printf("test5: %s\n", test5.const_ptr());
 	printf("test6: %s\n", test6.const_ptr());
 	printf("test7: %s\n", test7.const_ptr());
+
+	RefString fileName = "D:\\Projects\\Mega\\Ultra\\super_testio.png";
+	RefString plain = plainName(fileName);
+
+	printf("fileName: %s\n", fileName.const_ptr());
+	printf("plainName: %s\n", plain.const_ptr());
+
+	fileName = "D:\\Projects\\super_testio2";
+	plain = plainName(fileName);
+
+	printf("fileName: %s\n", fileName.const_ptr());
+	printf("plainName: %s\n", plain.const_ptr());
+
+	fileName = "super_testio2";
+	plain = plainName(fileName);
+
+	printf("fileName: %s\n", fileName.const_ptr());
+	printf("plainName: %s\n", plain.const_ptr());
 }

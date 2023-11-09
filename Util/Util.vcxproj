@@ -31,6 +31,10 @@
     <ClInclude Include="Config\Config_IOption.h" />
     <ClInclude Include="Config\Config_Option.h" />
     <ClInclude Include="Config\Config_StringResource.h" />
+    <ClInclude Include="Config\Config_XML.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Containers.h" />
     <ClInclude Include="Containers\BitSet.h" />
     <ClInclude Include="Containers\BlockAllocator.h" />
@@ -70,6 +74,10 @@
     <ClInclude Include="Graphics\FileMeshInternal.h" />
     <ClInclude Include="Graphics\loadILBM.h" />
     <ClInclude Include="Graphics\LoadImage.h" />
+    <ClInclude Include="Graphics\LoadJPEG.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Graphics\LoadPNG.h" />
     <ClInclude Include="Graphics\lodepng.h" />
     <ClInclude Include="Graphics\LoadPCX.h" />
@@ -106,6 +114,10 @@
     <ClInclude Include="Misc.h" />
     <ClInclude Include="Misc\ConstTextIterator.h" />
     <ClInclude Include="Misc\Convert.h" />
+    <ClInclude Include="Misc\Directory.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Misc\Monostate.h" />
     <ClInclude Include="Misc\Process.h" />
     <ClInclude Include="Misc\SwapT.h" />
@@ -128,7 +140,12 @@
     <ClInclude Include="Windows.h" />
     <ClInclude Include="Windows\BaseWindow.h" />
     <ClInclude Include="Windows\ComboBox.h" />
+    <ClInclude Include="Windows\DesktopWorker.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Windows\Dialog.h" />
+    <ClInclude Include="Windows\EnumMonitors.h" />
     <ClInclude Include="Windows\MemoryDLL.h" />
     <ClInclude Include="Windows\MemoryDLL_Util.h" />
     <ClInclude Include="Windows\Rect.h" />
@@ -146,6 +163,7 @@
     <ClCompile Include="Config\Config_Defaults.cpp" />
     <ClCompile Include="Config\Config_IOption.cpp" />
     <ClCompile Include="Config\Config_StringResource.cpp" />
+    <ClCompile Include="Config\Config_XML.cpp" />
     <ClCompile Include="Containers\Maybe.cpp" />
     <ClCompile Include="Core\Debug.cpp" />
     <ClCompile Include="Core\File.cpp" />
@@ -161,6 +179,10 @@
     <ClCompile Include="Graphics\FileMesh.cpp" />
     <ClCompile Include="Graphics\loadILBM.cpp" />
     <ClCompile Include="Graphics\LoadImage.cpp" />
+    <ClCompile Include="Graphics\LoadJPEG.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Graphics\LoadPNG.cpp" />
     <ClCompile Include="Graphics\lodepng.cpp" />
     <ClCompile Include="Graphics\LoadPCX.cpp" />
@@ -184,16 +206,24 @@
     <ClCompile Include="Math\MatrixStack.cpp" />
     <ClCompile Include="Misc\ConstTextIterator.cpp" />
     <ClCompile Include="Misc\Convert.cpp" />
+    <ClCompile Include="Misc\Directory.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Misc\Process.cpp" />
     <ClCompile Include="Misc\TextIterator.cpp" />
     <ClCompile Include="Misc\TextIteratorBase.cpp" />
     <ClCompile Include="Misc\TextManip.cpp" />
-    <ClCompile Include="Pointers\RefPtr.cpp" />
     <ClCompile Include="Pointers\WeakPtr.cpp" />
     <ClCompile Include="Text\RefString.cpp" />
     <ClCompile Include="Windows\BaseWindow.cpp" />
     <ClCompile Include="Windows\ComboBox.cpp" />
+    <ClCompile Include="Windows\DesktopWorker.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Windows\Dialog.cpp" />
+    <ClCompile Include="Windows\EnumMonitors.cpp" />
     <ClCompile Include="Windows\MemoryDLL.cpp" />
     <ClCompile Include="Windows\MemoryDLL_Util.cpp" />
     <ClCompile Include="Windows\Rect.cpp" />
@@ -269,6 +299,10 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -285,6 +319,10 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -310,6 +348,10 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -329,6 +371,10 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

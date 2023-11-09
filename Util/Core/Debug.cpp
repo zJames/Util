@@ -14,16 +14,12 @@
 #include <time.h>
 #include <stdarg.h>
 #include <windows.h>
+#include <Psapi.h>
 ////////////////////////////////////////////////////////////////////////////////
 
 #ifdef _DEBUG
 
-RefString debugFileName();
-
 static const RefString kBaseFolder = "D:\\Logs\\";
-
-static File sDebugText(debugFileName(), File::eOption_Append_Text);
-
 
 //------------------------------------------------------------------------------
 //	Local Functions
@@ -52,9 +48,36 @@ RefString debugFileName()
 {
 	RefString moduleName(256);
 
-	GetModuleFileName(NULL, moduleName.ptr(), DWORD(moduleName.dataSize()));
+	HMODULE hModule = NULL;
+
+	if (!GetModuleHandleEx(
+			GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,
+			(LPCSTR)&getTimeStr,
+			&hModule))
+	{
+		return kBaseFolder + "Default.txt";
+	}
+	
+	if (!GetModuleFileName(hModule, moduleName.ptr(), DWORD(moduleName.dataSize())))
+	{
+		return kBaseFolder + "Default.txt";
+	}
+
+	//GetModuleFileName(NULL, moduleName.ptr(), DWORD(moduleName.dataSize()));
 
 	return kBaseFolder + plainName(moduleName) + "_Debug.txt";
+}
+
+File& getDebugText()
+{
+	static File sDebugText;
+
+	if (!sDebugText.isValid())
+	{
+		sDebugText.open(debugFileName(), File::eOption_Append_Text);
+	}
+
+	return sDebugText;
 }
 
 
@@ -64,8 +87,8 @@ RefString debugFileName()
 void LogDebug(const char* text)
 {
 	OutputDebugString(text);
-	fprintf(sDebugText, "%s %s", getTimeStr(), text);
-	fflush(sDebugText);
+	fprintf(getDebugText(), "%s %s", getTimeStr(), text);
+	fflush(getDebugText());
 }
 
 void LogDebugArgs(const char* text, ...)
@@ -84,8 +107,8 @@ void LogDebugArgs(const char* text, ...)
 void LogDebugW(const wchar_t* text)
 {
 	OutputDebugStringW(text);
-	fwprintf(sDebugText, text);
-	fflush(sDebugText);
+	fwprintf(getDebugText(), text);
+	fflush(getDebugText());
 }
 
 void LogDebugArgsW(const wchar_t* text, ...)

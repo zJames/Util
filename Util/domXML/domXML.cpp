@@ -196,6 +196,23 @@ Node Node::getNode(const RefString& name) const
 	return Node();
 }
 
+std::list<Node> Node::nodes() const
+{
+	std::list<Node> ret;
+
+	if (!isValid())
+	{
+		return ret;
+	}
+
+	for (size_t i = 0; i < mOffsets.size(); ++i)
+	{
+		ret.push_back(Node(mData, mPtr + mOffsets[i]));
+	}
+
+	return ret;
+}
+
 
 //------------------------------------------------------------------------------
 //	Public Functions
@@ -212,25 +229,25 @@ Node getFirstNode(const SharedArray<const char>& file)
 		start = eatWhite(start + 3);
 	}
 
-	if (comp(start, "<?xml", false))
-	{
-		while ((inString || *start != '>') && *start != 0)
-		{
-			if (*start == '\"')
-			{
-				inString ^= true;
-			}
+	//if (comp(start, "<?xml", false))
+	//{
+	//	while ((inString || *start != '>') && *start != 0)
+	//	{
+	//		if (*start == '\"')
+	//		{
+	//			inString ^= true;
+	//		}
 
-			++start;
-		}
+	//		++start;
+	//	}
 
-		if (*start == '>')
-		{
-			++start;
-		}
-	}
+	//	if (*start == '>')
+	//	{
+	//		++start;
+	//	}
+	//}
 
-	start = (char*)eatWhite(start);
+	//start = (char*)eatWhite(start);
 
 	return Node(file, start);
 }

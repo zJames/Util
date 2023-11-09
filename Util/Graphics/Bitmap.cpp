@@ -101,10 +101,14 @@ int Bitmap::readColorMap(const BYTE* pData, const BITMAPINFOHEADER *infoheader)
 	unsigned int ColorMapSize = infoheader->biClrUsed;
 
 	if (infoheader->biClrUsed == 0)
+	{
 		ColorMapSize = 1 << infoheader->biBitCount;
+	}
 
 	if (ColorMapSize > 256)
+	{
 		return -1;
+	}
 
 	if (ColorMapSize)
 	{
@@ -151,24 +155,25 @@ int Bitmap::decompressToBitmap(const char *CompressedData, int DataLength)
 					return 0;
 
 				default:
-					if (x + Input > width())
 					{
-						return 0;
+						if (x + Input > width())
+						{
+							return 0;
+						}
+
+						if (CompressedData + Input >= DataEnd)
+						{
+							return 0;
+						}
+
+						memcpy(Output + x, CompressedData, Input);
+
+						x += Input;
+						CompressedData += Input;
+
+						if ((Input & 1) != 0)
+							CompressedData++;
 					}
-
-					if (CompressedData + Input >= DataEnd)
-					{
-						return 0;
-					}
-
-					memcpy(Output + x, CompressedData, Input);
-
-					x += Input;
-					CompressedData += Input;
-
-					if ((Input & 1) != 0)
-						CompressedData++;
-
 					break;
 				}
 			}
@@ -239,14 +244,20 @@ bool Bitmap::internalLoadBMPFile(const BYTE* pData)
 
 	// Check the type field to make sure we have a BMP file.
 	if (fileheader->bfType != ('M' * 256 + 'B'))
+	{
 		return false;
+	}
 
 	// Sanity check the info header.
 	if (infoheader->biSize != sizeof(BITMAPINFOHEADER))
+	{
 		return false;
+	}
 
 	if (infoheader->biPlanes != 1)
+	{
 		return false;
+	}
 
 	// These are the only depths I'm interested in handling. 1 and 4 bits per pixel
 	// are also legal, but too much hassle.
@@ -283,14 +294,18 @@ bool Bitmap::internalLoadBMPFile(const BYTE* pData)
 	{
 		// We only support 8-bit RLE8 files - logically enough.
 		if (infoheader->biBitCount != 8)
+		{
 			return false;
+		}
 
 		// Decompress.
 		const int iNumLines =
 			decompressToBitmap((char *)bmpData, infoheader->biSizeImage);
 
 		if (iNumLines != height())
+		{
 			return false;
+		}
 	}
 	else
 #endif
@@ -329,7 +344,9 @@ bool Bitmap::loadData(const char* data)
 	int x;
 
 	if (!data)
+	{
 		return false;
+	}
 
 	setSize(info[0], info[1], format(info[2]));
 
@@ -351,18 +368,17 @@ bool Bitmap::loadBMPFile(const char* szFileName)
 	File file(szFileName, File::eOption_Read_Binary);
 
 	if (!file.isValid())
+	{
 		return false;
+	}
 
 	const size_t fileSize = file.size();
 
 	ScopedArray<BYTE> data(new BYTE[fileSize]);
 
-	if (file.read(data.get(), fileSize))
+	if (file.read(data.get(), fileSize) && internalLoadBMPFile(data.get()))
 	{
-		if (internalLoadBMPFile(data.get()))
-		{
-			return true;
-		}
+		return true;
 	}
 
 	freeBitmap();
@@ -385,7 +401,9 @@ bool Bitmap::loadResource(LPCSTR name, HINSTANCE hInst)
 			LR_CREATEDIBSECTION | LR_DEFAULTSIZE);
 
 	if (image == NULL)
+	{
 		return false;
+	}
 
 	BITMAP info;
 
@@ -449,10 +467,14 @@ void Bitmap::freeBitmap()
 		}
 
 		if (mBitmapNew)
+		{
 			DeleteObject(mBitmapNew);
+		}
 
 		if (mBitmapDC)
+		{
 			DeleteDC(mBitmapDC);
+		}
 	}
 
 	initBitmap();
@@ -612,7 +634,9 @@ bool Bitmap::setSize(int width, int height, Format fmt)
 			mBitmapDC = CreateCompatibleDC(TempDC);
 
 			if (mBitmapDC)
+			{
 				mBitmapMonochrome = (HBITMAP)SelectObject(mBitmapDC, mBitmapNew);
+			}
 		}
 
 		DeleteDC(TempDC);
@@ -633,7 +657,9 @@ bool Bitmap::setSize(int width, int height, Format fmt)
 void Bitmap::draw(HDC destDC, int destx, int desty) const
 {
 	if (!hasBitmap())
+	{
 		return;
+	}
 
 	BitBlt(destDC, destx, desty, width(), height(), mBitmapDC, 0, 0, SRCCOPY);
 }
@@ -641,7 +667,9 @@ void Bitmap::draw(HDC destDC, int destx, int desty) const
 void Bitmap::draw(HDC destDC, int destx, int desty, int destwidth, int destheight, int sourcex, int sourcey) const
 {
 	if (!hasBitmap())
+	{
 		return;
+	}
 
 	StretchBlt(
 		destDC,

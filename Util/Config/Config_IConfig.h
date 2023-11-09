@@ -27,7 +27,7 @@ namespace Config
 		virtual const char* getRawOption(const char*) const = 0;
 
 		template<class T>
-		T get(const Option<T>& option)
+		T get(const Option<T>& option) const
 		{
 			return option.convert(getRawOption(option.name()), seperator);
 		}

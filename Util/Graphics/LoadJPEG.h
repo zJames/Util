@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-//  Copyright : (c) 2015
+//  Copyright : (c) 2022
 //  Authors :
 //	  JRP	James Prettyman
 //------------------------------------------------------------------------------
@@ -7,20 +7,9 @@
 #pragma once
 ////////////////////////////////////////////////////////////////////////////////
 
+class Bitmap;
 
 //------------------------------------------------------------------------------
-//	Graphics
+//	LoadJPEG
 //------------------------------------------------------------------------------
-#include "Graphics/ARGB.h"
-#include "Graphics/ARGBFX.h"
-#include "Graphics/Bitmap.h"
-#include "Graphics/ConvertToGrayMap.h"
-#include "Graphics/CycleBitmap.h"
-#include "Graphics/FileMesh.h"
-#include "Graphics/loadILBM.h"
-#include "Graphics/LoadImage.h"
-#include "Graphics/LoadJPEG.h"
-#include "Graphics/LoadPCX.h"
-#include "Graphics/LoadPNG.h"
-#include "Graphics/SaveImage.h"
-#include "Graphics/SharedImage.h"
+bool loadJPEG(const char* szFileName, Bitmap& output);

@@ -368,6 +368,21 @@
     <ClInclude Include="Hooking\Hooking_Alloc.h">
       <Filter>Source Files\Hooking</Filter>
     </ClInclude>
+    <ClInclude Include="Misc\Directory.h">
+      <Filter>Source Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\EnumMonitors.h">
+      <Filter>Source Files\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\DesktopWorker.h">
+      <Filter>Source Files\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Config\Config_XML.h">
+      <Filter>Source Files\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\LoadJPEG.h">
+      <Filter>Source Files\Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Graphics\Bitmap.cpp">
@@ -432,9 +447,6 @@
     </ClCompile>
     <ClCompile Include="Windows\Window.cpp">
       <Filter>Source Files\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="Pointers\RefPtr.cpp">
-      <Filter>Source Files\Pointers</Filter>
     </ClCompile>
     <ClCompile Include="Pointers\WeakPtr.cpp">
       <Filter>Source Files\Pointers</Filter>
@@ -528,6 +540,21 @@
     </ClCompile>
     <ClCompile Include="Hooking\Hooking_Alloc.cpp">
       <Filter>Source Files\Hooking</Filter>
+    </ClCompile>
+    <ClCompile Include="Misc\Directory.cpp">
+      <Filter>Source Files\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\EnumMonitors.cpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\DesktopWorker.cpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Config\Config_XML.cpp">
+      <Filter>Source Files\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\LoadJPEG.cpp">
+      <Filter>Source Files\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

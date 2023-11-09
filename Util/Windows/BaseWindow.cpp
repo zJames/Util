@@ -32,6 +32,7 @@ void BaseWindow::setTitle(const TCHAR* szTitle)
 	SetWindowText(m_hWnd, szTitle);
 }
 
+
 void BaseWindow::destroyMenu()
 {
 	if (m_hMenu != NULL)

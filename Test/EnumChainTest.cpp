@@ -41,7 +41,9 @@ template<class T>
 RefString maybeToString(const Maybe<T>& maybe)
 {
 	if (!maybe.get())
+	{
 		return "nothing";
+	}
 
 	char temp[128];
 

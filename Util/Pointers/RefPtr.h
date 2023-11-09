@@ -1,39 +1,54 @@
 //------------------------------------------------------------------------------
-//  Copyright : (c) 2006
+//  Copyright : (c) 2023
 //  Authors :
 //	  JRP	James Prettyman
 //------------------------------------------------------------------------------
-#ifndef REFPTR_H
-#define REFPTR_H
+
+#pragma once
+
+#include "..\Core\ReferenceCounter.h"
 ////////////////////////////////////////////////////////////////////////////////
-
-
-//------------------------------------------------------------------------------
-//	Referenced Pointer Data
-//------------------------------------------------------------------------------
-struct RefData
-{
-protected:
-	static void addRef(void*);
-	static bool decRef(void*);
-};
 
 
 //------------------------------------------------------------------------------
 //	Referenced Pointer
 //------------------------------------------------------------------------------
 template<class T>
-class RefPtr: public RefData
+class RefPtr
 {
 public:
 	typedef RefPtr<T> This;
 
-	RefPtr(): mPtr(0)		{}
-	RefPtr(T* t): mPtr(0)	{ set(t); }
-	~RefPtr()				{ set((T*)0); }
+	RefPtr(): mPtr(nullptr) {}
+	RefPtr(T* t): mPtr(nullptr) { set(t); }
+	
+	~RefPtr() { set(nullptr); }
 
-	void set(T* ptr)					{ if (decRef(mPtr)) delete mPtr; mPtr = ptr; addRef(mPtr); }
-	This& operator =(const This& rhs)	{ set(rhs.mPtr); return *this; }
+	void set(T* ptr)
+	{
+		Maybe<int> check = mRefCounter.release();
+
+		if (check != nothing && *check == 0)
+		{
+			delete mPtr;
+		}
+
+		mPtr = ptr;
+
+		if (mPtr != nullptr)
+		{
+			mRefCounter.create();
+		}
+	}
+
+	void set(This& other)
+	{
+		set(nullptr);
+		mPtr = other.mPtr;
+		mRefCounter = other.mRefCounter;
+	}
+	
+	This& operator =(const This& rhs)	{ set(rhs); return *this; }
 	
 	operator T* ()						{ return mPtr;}
 	operator const T* () const			{ return mPtr;}
@@ -45,8 +60,5 @@ public:
 
 private:
 	T* mPtr;
+	ReferenceCounter mRefCounter;
 };
-
-
-////////////////////////////////////////////////////////////////////////////////
-#endif

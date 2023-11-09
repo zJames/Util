@@ -32,7 +32,7 @@ namespace Config
 		Defaults(const Default* defaults, size_t numDefaults);
 		Defaults(const StringMap& stringMap);
 
-		const char* getRawOption(const char* name) const;
+		const char* getRawOption(const char* name) const override;
 
 	private:
 		void convert(const Default* defaults, size_t numDefualts);

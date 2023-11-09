@@ -125,7 +125,6 @@ void SavePNG(const Bitmap& input, const char* fileName)
 			convertForLodePNG<4>(input, temp);
 			//lodepng_encode32(output, &outputSize, &temp[0], input.width(), input.height());
 			lodepng::encode(output, temp, input.width(), input.height());
-
 		}
 		break;
 
