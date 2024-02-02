@@ -49,7 +49,9 @@ public:
 		release();
 
 		if (ptr == NULL)
+		{
 			return;
+		}
 
 		mPtr = ptr;
 		ptr->AddRef();
@@ -58,7 +60,9 @@ public:
 	void release()
 	{
 		if (mPtr)
+		{
 			mPtr->Release();
+		}
 
 		mPtr = 0;
 	}

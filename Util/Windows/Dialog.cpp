@@ -20,10 +20,7 @@ Dialog::Dialog() {}
 
 Dialog::~Dialog()
 {
-	if (m_hWnd != NULL)
-	{
-		EndDialog(m_hWnd, 0);
-	}
+	destroy();
 }
 
 
@@ -45,7 +42,7 @@ INT_PTR Dialog::create(HWND hWndParent, HINSTANCE hInstance, TCHAR* lpTemplate, 
 				dlgProc,
 				(LPARAM)this);
 
-		return hWnd ? FALSE : TRUE;
+		m_hWnd = hWnd;
 	}
 
 	return DialogBoxParam(hInstance, lpTemplate, hWndParent, dlgProc, (LPARAM)this);
@@ -95,15 +92,15 @@ INT_PTR CALLBACK Dialog::dlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM 
 
 	Dialog* pDialog = reinterpret_cast<Dialog*>(GetWindowLongPtr(hDlg, DWLP_USER));
 
-	if (pDialog == NULL)
-	{
-		return ret;
-	}
-
 	if (message == WM_DESTROY)
 	{
 		pDialog->destroy();
+		SetWindowLongPtr(hDlg, DWLP_USER, 0);
+		pDialog = NULL;
 	}
 
-	return pDialog->onMessage(message, wParam, lParam) | ret;
+	return ((pDialog != nullptr)
+		? pDialog->onMessage(message, wParam, lParam)
+		: FALSE)
+			| ret;
 }

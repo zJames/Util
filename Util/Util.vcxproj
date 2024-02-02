@@ -146,9 +146,11 @@
     </ClInclude>
     <ClInclude Include="Windows\Dialog.h" />
     <ClInclude Include="Windows\EnumMonitors.h" />
+    <ClInclude Include="Windows\Library.h" />
     <ClInclude Include="Windows\MemoryDLL.h" />
     <ClInclude Include="Windows\MemoryDLL_Util.h" />
     <ClInclude Include="Windows\Rect.h" />
+    <ClInclude Include="Windows\SharedLibrary.h" />
     <ClInclude Include="Windows\Thread.h" />
     <ClInclude Include="Windows\ThreadLock.h" />
     <ClInclude Include="Windows\Window.h" />
@@ -224,6 +226,7 @@
     </ClCompile>
     <ClCompile Include="Windows\Dialog.cpp" />
     <ClCompile Include="Windows\EnumMonitors.cpp" />
+    <ClCompile Include="Windows\Library.cpp" />
     <ClCompile Include="Windows\MemoryDLL.cpp" />
     <ClCompile Include="Windows\MemoryDLL_Util.cpp" />
     <ClCompile Include="Windows\Rect.cpp" />

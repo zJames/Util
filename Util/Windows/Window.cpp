@@ -22,8 +22,6 @@ Window::Window()
 
 Window::~Window()
 {
-	destroyMenu();
-
 	if (m_hWnd != NULL)
 	{
 		DestroyWindow(m_hWnd);
