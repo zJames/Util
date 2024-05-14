@@ -79,6 +79,14 @@ TextIteratorBase::TextIteratorBase(TextType text, const SplitArray& splitOn)
 	findFirst();
 }
 
+TextIteratorBase::~TextIteratorBase()
+{
+	if (mNext.get() != NULL)
+	{
+		*mNext = mBackup;
+	}
+}
+
 const char* TextIteratorBase::get() const
 {
 	return mCurrent.get();
@@ -91,7 +99,13 @@ TextIteratorBase& TextIteratorBase::operator++ ()
 	if (mNext.get() != NULL)
 	{
 		*mNext = mBackup;
-		++mCurrent;
+
+		size_t len = isSplit(mCurrent);
+
+		while (len-- > 0)
+		{
+			++mCurrent;
+		}
 	}
 
 	mNext = findNext();
@@ -117,29 +131,31 @@ TextIteratorBase& TextIteratorBase::operator++ ()
 	return *this;
 }
 
-bool TextIteratorBase::isSplit(TextType test) const
+size_t TextIteratorBase::isSplit(TextType test) const
 {
 	for (size_t i = 0; i < mSplits.size(); ++i)
 	{
 		if (comp(test.get(), mSplits[i].c_str()))
 		{
-			return true;
+			return mSplits[i].length();
 		}
 	}
 
-	return false;
+	return 0;
 }
 
 TextIteratorBase::TextType TextIteratorBase::findNext() const
 {
 	if (mCurrent == NULL)
+	{
 		return TextType();
+	}
 
 	TextType check = mCurrent;
 
 	while (*check != 0)
 	{
-		if (isSplit(check))
+		if (isSplit(check) > 0)
 		{
 			return check;
 		}

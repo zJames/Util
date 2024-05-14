@@ -29,13 +29,14 @@ public:
 	TextIteratorBase(TextType text, char splitOn);
 	TextIteratorBase(TextType text, const char* splitOn);
 	TextIteratorBase(TextType text, const SplitArray& splitOn);
+	~TextIteratorBase();
 
 	const char* get() const;
 
 	TextIteratorBase& operator++();
 
 protected:
-	bool isSplit(TextType test) const;
+	size_t isSplit(TextType test) const;
 	TextType findNext() const;
 
 	void findFirst();
